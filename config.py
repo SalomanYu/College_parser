@@ -2,6 +2,7 @@ from typing import NamedTuple
 import sqlite3
 from datetime import date
 from selenium.webdriver.chrome.webdriver import WebDriver
+import logging 
 
 from dataclasses import dataclass
 
@@ -12,6 +13,14 @@ DOMAIN = "https://russia.ucheba.ru"
 DATABASE_NAME = 'UchebaRU'
 COLLEGE_TABLE_NAME = 'Colleges'
 COURSE_TABLE_NAME = 'Courses'
+LOG_FILENAME = 'LOGGING/parser.log'
+
+log_file = open(LOG_FILENAME, 'w') 
+log_file.close()
+
+logging.basicConfig(filename=LOG_FILENAME, encoding='utf-8', level=logging.DEBUG)
+logging.getLogger("urllib3").setLevel(logging.WARNING) # Без этого urllib3 выводит страшные большие белые сообщения
+logging.getLogger('selenium').setLevel(logging.WARNING)
 
 
 @dataclass

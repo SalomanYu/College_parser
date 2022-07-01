@@ -27,22 +27,6 @@ def parse_programs(url: str, college_id: int) -> None:
         training_option = _getTrainingOptions(about_program_soup)
         database.add_course(db_name=DATABASE_NAME, table_name=COURSE_TABLE_NAME, data=Course(college_id,title, descr, program_descr, admissionConditions, training_option.budgetAveragePassing, training_option.budgetPlaces, training_option.paidPlaces, training_option.startDate, training_option.duration_in_month, training_option.name, cost, program_url))
 
-def _getBudgetPlaces(program: BeautifulSoup) -> int:
-    budgetPlaces = program.find('div', class_='big-number-h2 price-year').text
-    try:
-        return int(budgetPlaces.split()[0])
-    except ValueError:
-        return 0
-
-
-def _get_budgetAveragePassing(program: BeautifulSoup) -> float:
-    try:
-        budgetAveragePassing = program.find('section', class_='search-results-options-item sro-point col-sm-4 col-xs-4').find('div', class_='big-number-h2').text.strip()
-
-        return float(budgetAveragePassing)
-    except ValueError:
-        return 0
-
 
 def _getCost(program: BeautifulSoup) -> int:
     try:
@@ -119,4 +103,4 @@ def _getTrainingOptions(about_program: BeautifulSoup) -> TrainingOption:
 
 if __name__ == "__main__":
     database.create_table_for_course(db_name=DATABASE_NAME, table_name=COURSE_TABLE_NAME)
-    print(parse_programs('https://russia.ucheba.ru/uz/17842/programs'))
+    # print(parse_programs('https://russia.ucheba.ru/uz/17842/programs'))

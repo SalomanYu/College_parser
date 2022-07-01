@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-from config import Connection, College, Course
+from config import Connection, College, Course, logging 
 
 
 def connect_to_db(name) -> Connection:
@@ -60,7 +60,8 @@ def add_college(db_name: str, table_name: str, data: College) -> None:
     cursor.execute(pattern, data)
     db.commit()
     db.close()
-    print(f'Добавлен колледж - {data.name}')
+    # print(f'Добавлен колледж - {data.name}')
+    logging.info("Added college - %s", data.name)
 
 
 def create_table_for_course(db_name: str, table_name: str) -> None:
@@ -111,5 +112,6 @@ def add_course(db_name: str, table_name: str, data: Course) -> None:
     cursor.execute(pattern, data)
     db.commit()
     db.close()
-    print(f'Добавлен курс - {data.name}')
+    # print(f'Добавлен курс - {data.name}')
+    logging.info("Added course - %s", data.name)
 
