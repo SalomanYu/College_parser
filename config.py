@@ -1,3 +1,4 @@
+import os
 from typing import NamedTuple
 import sqlite3
 from datetime import date
@@ -14,6 +15,10 @@ DATABASE_NAME = 'UchebaRU'
 COLLEGE_TABLE_NAME = 'Colleges'
 COURSE_TABLE_NAME = 'Courses'
 LOG_FILENAME = 'LOGGING/parser.log'
+
+
+
+os.makedirs("LOGGING", exist_ok=True)
 
 log_file = open(LOG_FILENAME, 'w') 
 log_file.close()
